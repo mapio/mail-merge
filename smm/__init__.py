@@ -13,8 +13,8 @@ TOKEN_GENERATION_AUTH = environ['TOKEN_GENERATION_AUTH']
 
 app = Flask(__name__, instance_relative_config = True)
 app.config.from_mapping(
+    SECRET_KEY = SECRET_KEY,
     MAX_CONTENT_LENGTH = 3 * 1024 * 1024,
-    SECRET_KEY = urandom(32).hex(),
     TOKEN_DURATION = 60 * 60 * 24 * 30 # 1 month
 )
 app.config.from_pyfile('config.py', silent = True)
