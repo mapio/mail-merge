@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling", "hatch-regex-commit"]
+build-backend = "hatchling.build"
+[project]
+name = "scythe-mail-merge"
+requires-python = ">=3.10"
+description = "An app to send mail merge messages"
+readme = "README.md"
+authors = [
+  { name = "Massimo Santini", email = "massimo.santini@unimi.it" },
+]
+dependencies = [
+  "Flask>=2.2.2",
+  "Flask-Mail>=0.9.1",
+  "itsdangerous>=2.1.2",
+]
+dynamic = ["version"]
+[project.urls]
+Homepage = "https://github.com/scythe-suite/mail-merge"
+[tool.hatch.version]
+source = "regex_commit"
+path = "smm/__init__.py"
+[tool.hatch.build]
+include = [
+  "smm/**"
+]
+[tool.hatch.envs.devel]
+detached = true
+dependencies = [
+  "gitchangelog",
+  "pystache",
+  "flake8",
+  "black",
+  "isort",
+]
+[tool.hatch.envs.devel.scripts]
+check = [
+  "flake8 ./ml",
+  "black --check --diff ./ml",
+  "isort --check-only --diff ./ml",
+]
+fmt = [
+  "isort ./ml",
+  "black ./ml",
+  "check",
+]
